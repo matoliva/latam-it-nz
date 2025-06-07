@@ -18,6 +18,13 @@
     "moreAboutMe": "More About Me",
     "imageAlt": "Professional Recruiter"
   },
+  "moreAbout": {
+    "title": "My Journey in Tech",
+    "description1": "I started my tech journey in Argentina, working as a frontend developer for various companies. After gaining experience in different roles and technologies, I decided to take the leap and move to New Zealand.",
+    "description2": "The transition wasn't easy, but it was worth it. I've learned a lot about the local tech industry, the job market, and what it takes to succeed as an international developer in New Zealand.",
+    "description3": "Now, I'm passionate about helping other Latin American developers make their transition smoother. Whether you're just starting in tech or looking to move to New Zealand, I'm here to share my experience and guide you through the process.",
+    "imageAlt": "Matías Oliva - Frontend Developer"
+  },
   "booking": {
     "title": "Book a Free Consultation",
     "description": "Let's discuss your career goals and how I can help you find the perfect opportunity in New Zealand's IT industry.",
@@ -27,7 +34,7 @@
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "description": "Your guide to IT opportunities in New Zealand",
+    "description": "Dev in NZ sharing what I wish I'd known when I started.",
     "quickLinks": "Quick Links",
     "connect": "Connect",
     "about": "About",

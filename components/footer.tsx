@@ -16,7 +16,6 @@ interface FooterProps {
       connect: string;
       about: string;
       bookSession: string;
-      openPositions: string;
     };
   };
 }
@@ -47,18 +46,13 @@ export function Footer({ lang, translations }: FooterProps) {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href={`/${lang}#about`} className="text-muted-foreground hover:text-foreground transition-colors">
+                  <Link href={`/${lang}#more-info`} className="text-muted-foreground hover:text-foreground transition-colors">
                     {footer.about}
                   </Link>
                 </li>
                 <li>
                   <Link href={`/${lang}#booking`} className="text-muted-foreground hover:text-foreground transition-colors">
                     {footer.bookSession}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={`/${lang}#positions`} className="text-muted-foreground hover:text-foreground transition-colors">
-                    {footer.openPositions}
                   </Link>
                 </li>
               </ul>
@@ -88,14 +82,14 @@ export function Footer({ lang, translations }: FooterProps) {
               <p className="text-sm text-muted-foreground">
                 © {currentYear} Latam IT NZ. {footer.rights}
               </p>
-              <div className="flex gap-6">
+              {/* <div className="flex gap-6">
                 <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {footer.privacy}
                 </Link>
                 <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {footer.terms}
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

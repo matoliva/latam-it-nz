@@ -16,7 +16,6 @@ interface HeaderProps {
       about: string;
       bookSession: string;
       openPositions: string;
-      moreInfo: string;
     };
   };
 }
@@ -25,10 +24,9 @@ export function Header({ lang, translations }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: translations.navigation.about, href: '#about' },
     { name: translations.navigation.bookSession, href: '#booking' },
-    { name: translations.navigation.openPositions, href: '#positions' },
-    { name: translations.navigation.moreInfo, href: '#more-info' },
+    { name: translations.navigation.about, href: '#more-info' },
+    // { name: translations.navigation.openPositions, href: '#positions' },
   ];
 
   // Prevent body scroll when menu is open
