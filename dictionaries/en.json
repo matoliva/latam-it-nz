@@ -1,0 +1,26 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About Me",
+    "bookSession": "Book a Session",
+    "openPositions": "Open Positions",
+    "moreInfo": "More Info",
+    "contact": "Contact"
+  },
+  "common": {
+    "welcome": "Welcome to Latam IT NZ",
+    "description": "Your gateway to IT opportunities in New Zealand"
+  },
+  "about": {
+    "title": "Connecting Top Talent With Great Companies",
+    "description": "With over 10 years of experience in the recruitment industry, I help candidates find their dream jobs and companies build exceptional teams.",
+    "bookConsultation": "Book a Consultation",
+    "viewPositions": "View Open Positions",
+    "imageAlt": "Professional Recruiter"
+  },
+  "booking": {
+    "title": "Book a Free Consultation",
+    "description": "Let's discuss your career goals and how I can help you find the perfect opportunity in New Zealand's IT industry.",
+    "scheduleButton": "Schedule time with me"
+  }
+} 

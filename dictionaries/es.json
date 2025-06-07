@@ -1,0 +1,26 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "bookSession": "Agendar Sesión",
+    "openPositions": "Posiciones Abiertas",
+    "moreInfo": "Más Información",
+    "contact": "Contacto"
+  },
+  "common": {
+    "welcome": "Bienvenido a Latam IT NZ",
+    "description": "Tu puerta de entrada a oportunidades IT en Nueva Zelanda"
+  },
+  "about": {
+    "title": "Conectando Talento con Grandes Empresas",
+    "description": "Con más de 10 años de experiencia en la industria de reclutamiento, ayudo a los candidatos a encontrar sus trabajos ideales y a las empresas a construir equipos excepcionales.",
+    "bookConsultation": "Agendar Consulta",
+    "viewPositions": "Ver Posiciones Abiertas",
+    "imageAlt": "Reclutador Profesional"
+  },
+  "booking": {
+    "title": "Agenda una Consulta Gratuita",
+    "description": "Hablemos sobre tus objetivos profesionales y cómo puedo ayudarte a encontrar la oportunidad perfecta en la industria IT de Nueva Zelanda.",
+    "scheduleButton": "Agendar tiempo conmigo"
+  }
+} 
