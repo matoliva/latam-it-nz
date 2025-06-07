@@ -12,7 +12,7 @@ export default async function MoreAboutSection({ lang }: MoreAboutSectionProps) 
     const dict = await getDictionary(lang);
 
     return (
-        <section id="more-info" className="md:py-24 lg:py-32 bg-muted/30">
+        <section id="more-info" className="py-16 bg-muted/30">
             <div className="container px-6 mx-auto max-w-7xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                     <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl order-2 md:order-1">

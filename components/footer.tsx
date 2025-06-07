@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Linkedin } from 'lucide-react';
 import { Locale } from '@/i18n.config';
+import BuyMeCoffeeButton from './buy-me-coffee-button';
 
 interface FooterProps {
   lang: Locale;
@@ -63,15 +64,20 @@ export function Footer({ lang, translations }: FooterProps) {
               <h3 className="font-semibold">
                 {footer.connect}
               </h3>
-              <div className="flex space-x-4">
-                <a
-                  href="https://www.linkedin.com/in/matias-oliva/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
+              <div className="flex flex-col space-y-6">
+                <div className="flex items-center space-x-4">
+                  <a
+                    href="https://www.linkedin.com/in/matias-oliva/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <BuyMeCoffeeButton variant="header" />
+                </div>
               </div>
             </div>
           </div>

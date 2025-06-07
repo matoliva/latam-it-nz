@@ -30,6 +30,10 @@
     "description": "Hablemos sobre tus objetivos profesionales y cómo puedo ayudarte a encontrar la oportunidad perfecta en la industria IT de Nueva Zelanda.",
     "scheduleButton": "Agendar tiempo conmigo"
   },
+  "buyMeCoffee": {
+    "title": "Apoya Mi Trabajo",
+    "description": "Si encontraste útil nuestra conversación y querés apoyar mi trabajo, podés invitarme un café. Tu apoyo me ayuda a continuar brindando orientación a la comunidad tecnológica latinoamericana en Nueva Zelanda."
+  },
   "footer": {
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de Privacidad",

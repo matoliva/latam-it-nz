@@ -9,6 +9,7 @@ import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Locale } from '@/i18n.config';
+import BuyMeCoffeeButton from './buy-me-coffee-button';
 
 import logo from '@/public/images/logo.png';
 
@@ -19,6 +20,7 @@ interface HeaderProps {
       about: string;
       bookSession: string;
       openPositions: string;
+      home: string;
     };
   };
 }
@@ -27,6 +29,7 @@ export function Header({ lang, translations }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
+    { name: translations.navigation.home, href: `/${lang}` },
     { name: translations.navigation.bookSession, href: '#booking' },
     { name: translations.navigation.about, href: '#more-info' },
     // { name: translations.navigation.openPositions, href: '#positions' },
@@ -79,7 +82,10 @@ export function Header({ lang, translations }: HeaderProps) {
             </nav>
 
             {/* Right side controls */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
+              <div className="hidden md:block">
+                <BuyMeCoffeeButton variant="header" />
+              </div>
               <ThemeToggle />
               <LanguageSelector lang={lang} />
               {/* Mobile menu button */}
@@ -144,6 +150,9 @@ export function Header({ lang, translations }: HeaderProps) {
                 {item.name}
               </Link>
             ))}
+            <div className="mt-4">
+              <BuyMeCoffeeButton variant="header" />
+            </div>
           </nav>
         </div>
       </div>

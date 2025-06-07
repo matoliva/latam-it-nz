@@ -30,6 +30,10 @@
     "description": "Let's discuss your career goals and how I can help you find the perfect opportunity in New Zealand's IT industry.",
     "scheduleButton": "Schedule time with me"
   },
+  "buyMeCoffee": {
+    "title": "Support My Work",
+    "description": "If you found our conversation helpful and would like to support my work, you can buy me a coffee. Your support helps me continue providing guidance to the Latin American tech community in New Zealand."
+  },
   "footer": {
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
