@@ -8,6 +8,8 @@ import { Footer } from "@/components/footer";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
 
+import { Analytics } from "@vercel/analytics/next"
+
 const inter = Inter({ subsets: ['latin'] });
 
 interface Props {
@@ -157,6 +159,7 @@ export default async function RootLayout({
           <Header lang={lang} translations={dictionary} />
           {children}
           <Footer lang={lang} translations={dictionary} />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
