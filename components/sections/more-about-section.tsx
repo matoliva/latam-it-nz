@@ -2,7 +2,7 @@ import Image from "next/image"
 import { getDictionary } from "@/lib/dictionary"
 import { Locale } from "@/i18n.config"
 
-import profileImage from '@/public/images/IMG_2661.webp';
+import profileImage from '@/public/images/me.jpg';
 
 interface MoreAboutSectionProps {
     lang: Locale;
