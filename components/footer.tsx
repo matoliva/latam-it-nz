@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 import { Locale } from '@/i18n.config';
 
 interface FooterProps {
@@ -82,14 +82,6 @@ export function Footer({ lang, translations }: FooterProps) {
               <p className="text-sm text-muted-foreground">
                 © {currentYear} Latam IT NZ. {footer.rights}
               </p>
-              {/* <div className="flex gap-6">
-                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {footer.privacy}
-                </Link>
-                <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {footer.terms}
-                </Link>
-              </div> */}
             </div>
           </div>
         </div>

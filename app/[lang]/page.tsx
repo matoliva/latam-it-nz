@@ -18,7 +18,7 @@ export default async function Home({ params }: Props) {
     <main className="flex flex-col items-center">
       <div className="w-full">
         <AboutSection lang={lang} />
-        <BookingSection lang={lang} translations={dict} />
+        <BookingSection translations={dict} />
         <MoreAboutSection lang={lang} />
       </div>
     </main>

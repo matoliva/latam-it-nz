@@ -1,10 +1,7 @@
 'use client';
 
-import { Locale } from "@/i18n.config";
 import dynamic from 'next/dynamic';
-
 import BuyMeCoffeeButton from "@/components/buy-me-coffee-button";
-
 
 const CalendlyWidget = dynamic(
     () => import('@/components/sections/calendly-widget'),
@@ -12,7 +9,6 @@ const CalendlyWidget = dynamic(
 );
 
 interface BookingSectionProps {
-    lang: Locale;
     translations: {
         booking: {
             title: string;
@@ -22,7 +18,7 @@ interface BookingSectionProps {
     };
 }
 
-export default function BookingSection({ lang, translations }: BookingSectionProps) {
+export default function BookingSection({ translations }: BookingSectionProps) {
     return (
         <section id="booking" className="py-24 md:py-32 bg-muted/30">
             <div className="container px-4 mx-auto max-w-7xl">
@@ -35,12 +31,10 @@ export default function BookingSection({ lang, translations }: BookingSectionPro
                             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
                                 {translations.booking.description}
                             </p>
-
                         </div>
                     </div>
                     <div className="bg-background rounded-2xl shadow-lg md:p-8">
                         <CalendlyWidget />
-
                     </div>
                     <div className="flex justify-center mt-8">
                         <BuyMeCoffeeButton />
