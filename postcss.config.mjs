@@ -1,8 +1,5 @@
 const config = {
-  plugins: [
-    "@tailwindcss/postcss",
-    require('postcss-themeize'),
-  ],
+  plugins: ["@tailwindcss/postcss"],
 };
 
 export default config;

@@ -14,8 +14,8 @@ export default function BuyMeCoffeeButton() {
       <Image 
         src={myImage}
         alt="Buy Me a Coffee"
-        width={350} // Further increased width
-        height={97} // Further increased height
+        width={250} // Increased width
+        height={70} // Increased height proportionally
       />
     </button>
   );

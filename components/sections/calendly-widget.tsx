@@ -21,7 +21,7 @@ export default function CalendlyWidget() {
             <div 
                 className="calendly-inline-widget" 
                 data-url="https://calendly.com/matiasoliva/guia-laboral-it-en-nueva-zelanda?hide_landing_page_details=1&hide_gdpr_banner=1" 
-                style={{ minWidth: '320px', height: '800px' }} 
+                style={{ minWidth: '320px', height: '1000px' }} 
             />
         </>
     );

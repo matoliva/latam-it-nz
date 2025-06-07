@@ -3,7 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +25,7 @@ export default async function RootLayout({
   params
 }: Props) {
   const { lang } = await params;
+  const dictionary = await getDictionary(lang);
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -50,7 +54,9 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Header lang={lang} translations={dictionary} />
           {children}
+          <Footer lang={lang} translations={dictionary} />
         </ThemeProvider>
       </body>
     </html>

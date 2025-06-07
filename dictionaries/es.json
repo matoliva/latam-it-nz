@@ -22,5 +22,10 @@
     "title": "Agenda una Consulta Gratuita",
     "description": "Hablemos sobre tus objetivos profesionales y cómo puedo ayudarte a encontrar la oportunidad perfecta en la industria IT de Nueva Zelanda.",
     "scheduleButton": "Agendar tiempo conmigo"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
   }
 } 

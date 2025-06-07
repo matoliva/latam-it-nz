@@ -22,5 +22,10 @@
     "title": "Book a Free Consultation",
     "description": "Let's discuss your career goals and how I can help you find the perfect opportunity in New Zealand's IT industry.",
     "scheduleButton": "Schedule time with me"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   }
 } 
