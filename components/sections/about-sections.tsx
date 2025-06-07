@@ -13,22 +13,22 @@ export default async function AboutSection({ lang }: AboutSectionProps) {
     const dict = await getDictionary(lang);
 
     return (
-        <section id="about" className="py-24 md:py-32 bg-background">
-            <div className="container px-4 mx-auto max-w-7xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div className="space-y-8">
+        <section id="about" className="py-32 md:py-40 bg-background">
+            <div className="container px-6 mx-auto max-w-7xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                    <div className="space-y-10">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                             {dict.about.title}
                         </h1>
                         <p className="text-xl text-muted-foreground leading-relaxed">
                             {dict.about.description}
                         </p>
-                        <div className="flex flex-wrap gap-6 pt-4">
-                            <Button size="lg" className="px-8" asChild>
+                        <div className="flex flex-wrap gap-8 pt-6">
+                            <Button size="lg" className="px-10" asChild>
                                 <a href="#booking">{dict.about.bookConsultation}</a>
                             </Button>
-                            <Button size="lg" variant="outline" className="px-8" asChild>
-                                <a href="#positions">{dict.about.viewPositions}</a>
+                            <Button size="lg" variant="outline" className="px-10" asChild>
+                                <a href="#more-info">{dict.about.moreAboutMe}</a>
                             </Button>
                         </div>
                     </div>

@@ -63,7 +63,7 @@ export function Header({ lang, translations }: HeaderProps) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium transition-colors hover:text-primary"
+                  className="text-base font-medium transition-colors hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
                 >
                   {item.name}
                 </Link>
@@ -130,7 +130,7 @@ export function Header({ lang, translations }: HeaderProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-2xl font-medium transition-colors hover:text-primary"
+                className="text-3xl font-medium transition-colors hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}

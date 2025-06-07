@@ -12,10 +12,10 @@
     "description": "Your gateway to IT opportunities in New Zealand"
   },
   "about": {
-    "title": "Connecting Top Talent With Great Companies",
-    "description": "With over 10 years of experience in the recruitment industry, I help candidates find their dream jobs and companies build exceptional teams.",
+    "title": "Latinos in NZ: how to get started in IT",
+    "description": "I'm Matías, a frontend developer living in New Zealand. If you're looking for your first IT job here or just want to understand how the market works, you can book a free call with me. I'll share my experience, useful resources, and practical tips. Did our chat help you out? You can support me with a coffee ☕ — no pressure 🙂",
     "bookConsultation": "Book a Consultation",
-    "viewPositions": "View Open Positions",
+    "moreAboutMe": "More About Me",
     "imageAlt": "Professional Recruiter"
   },
   "booking": {
@@ -26,6 +26,12 @@
   "footer": {
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "terms": "Terms of Service",
+    "description": "Your guide to IT opportunities in New Zealand",
+    "quickLinks": "Quick Links",
+    "connect": "Connect",
+    "about": "About",
+    "bookSession": "Book a Session",
+    "openPositions": "Open Positions"
   }
 } 

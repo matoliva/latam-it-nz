@@ -7,8 +7,8 @@ import BuyMeCoffeeButton from "@/components/buy-me-coffee-button";
 
 
 const CalendlyWidget = dynamic(
-  () => import('@/components/sections/calendly-widget'),
-  { ssr: false }
+    () => import('@/components/sections/calendly-widget'),
+    { ssr: false }
 );
 
 interface BookingSectionProps {
@@ -35,13 +35,15 @@ export default function BookingSection({ lang, translations }: BookingSectionPro
                             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
                                 {translations.booking.description}
                             </p>
-                            <div className="md:flex-shrink-0">
-                                <BuyMeCoffeeButton />
-                            </div>
+
                         </div>
                     </div>
                     <div className="bg-background rounded-2xl shadow-lg p-6 md:p-8">
                         <CalendlyWidget />
+
+                    </div>
+                    <div className="flex justify-center mt-8">
+                        <BuyMeCoffeeButton />
                     </div>
                 </div>
             </div>

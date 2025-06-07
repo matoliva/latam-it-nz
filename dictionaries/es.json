@@ -12,10 +12,10 @@
     "description": "Tu puerta de entrada a oportunidades IT en Nueva Zelanda"
   },
   "about": {
-    "title": "Conectando Talento con Grandes Empresas",
-    "description": "Con más de 10 años de experiencia en la industria de reclutamiento, ayudo a los candidatos a encontrar sus trabajos ideales y a las empresas a construir equipos excepcionales.",
+    "title": "Latinos en NZ: cómo empezar en IT sin vueltas.",
+    "description": "Soy Matías, desarrollador frontend viviendo en Nueva Zelanda. Si estás buscando tu primer trabajo IT acá o querés entender cómo es el mercado, podés agendar una charla gratuita conmigo. Te comparto mi experiencia, recursos útiles y consejos prácticos. ¿Te sumó lo que hablamos? Podés apoyarme con un café ☕, sin compromiso 🙂",
     "bookConsultation": "Agendar Consulta",
-    "viewPositions": "Ver Posiciones Abiertas",
+    "moreAboutMe": "Más Sobre Mí",
     "imageAlt": "Reclutador Profesional"
   },
   "booking": {
@@ -26,6 +26,12 @@
   "footer": {
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de Privacidad",
-    "terms": "Términos de Servicio"
+    "terms": "Términos de Servicio",
+    "description": "Tu guía para oportunidades IT en Nueva Zelanda",
+    "quickLinks": "Enlaces Rápidos",
+    "connect": "Mis redes",
+    "about": "Sobre Mí",
+    "bookSession": "Agendar Sesión",
+    "openPositions": "Posiciones Abiertas"
   }
 } 
