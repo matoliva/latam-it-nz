@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { LanguageSelector } from './language-selector';
@@ -8,6 +9,8 @@ import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Locale } from '@/i18n.config';
+
+import logo from '@/public/images/logo.png';
 
 interface HeaderProps {
   lang: Locale;
@@ -50,7 +53,14 @@ export function Header({ lang, translations }: HeaderProps) {
           <div className="flex h-16 items-center justify-between">
             {/* Logo or site name */}
             <div className="flex-shrink-0">
-              <Link href={`/${lang}`} className="text-xl font-bold">
+              <Link href={`/${lang}`} className="text-xl font-bold flex items-center gap-2">
+                <Image 
+                  src={logo} 
+                  alt="Latam IT NZ Logo" 
+                  width={30} 
+                  height={30} 
+                  className="inline-block dark:invert"
+                />
                 Latam IT NZ
               </Link>
             </div>

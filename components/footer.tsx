@@ -65,7 +65,7 @@ export function Footer({ lang, translations }: FooterProps) {
               </h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://www.linkedin.com/in/matiasoliva/"
+                  href="https://www.linkedin.com/in/matias-oliva/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
