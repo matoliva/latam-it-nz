@@ -21,7 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <pre className="bg-gray-900 text-white rounded-lg p-4 overflow-x-auto my-6" {...props} />
     ),
     a: (props) => (
-      <a className="text-blue-600 hover:underline font-medium" {...props} />
+      <a className="text-blue-600 dark:text-sky-400 hover:underline hover:text-blue-800 dark:hover:text-sky-300" target="_blank" rel="noopener noreferrer" {...props} />
     ),
     strong: (props) => <strong className="font-semibold text-gray-900" {...props} />,
     em: (props) => <em className="italic text-gray-800" {...props} />,
