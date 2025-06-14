@@ -90,8 +90,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       alternates: {
         canonical: '/es',
         languages: {
-          'en': '/en',
           'es': '/es',
+          'en': '/en',
         },
       },
       openGraph: {
