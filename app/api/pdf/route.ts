@@ -10,15 +10,21 @@ export async function GET(request: NextRequest) {
   });
   const page = await browser.newPage();
 
-  // Navigate to the job guide page. Adjust the URL as per your application's routing.
-  // Assuming your application runs on http://localhost:3000 during development.
-  const url = `http://localhost:3000/${lang}/it-job-guide`;
+  // Navigate to the print-specific job guide page.
+  const baseUrl = request.nextUrl.origin;
+  const url = `${baseUrl}/${lang}/it-job-guide/print`;
   await page.goto(url, { waitUntil: 'networkidle0' });
 
   // Generate PDF
   const pdf = await page.pdf({
     format: 'A4',
     printBackground: true,
+    margin: {
+      top: '0.75in',
+      right: '0.75in',
+      bottom: '0.75in',
+      left: '0.75in',
+    },
   });
 
   await browser.close();
