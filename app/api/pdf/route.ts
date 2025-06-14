@@ -2,6 +2,9 @@ import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const lang = searchParams.get('lang') || 'es';
