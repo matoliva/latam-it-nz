@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
+import chromium from '@sparticuz/chromium-min';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = "force-dynamic";
@@ -14,10 +14,10 @@ export async function GET(request: NextRequest) {
   let browser;
   try {
     if (isVercel) {
-      // Vercel deployment: use @sparticuz/chromium
+      // Vercel deployment: use @sparticuz/chromium-min with direct executable path
       browser = await puppeteer.launch({
         args: [...chromium.args, '--hide-scrollbars', '--mute-audio'],
-        executablePath: await chromium.executablePath(),
+        executablePath: await chromium.executablePath('https://github.com/Sparticuz/chromium/releases/download/v137.0.0/chromium-v137.0.0-pack.x64.tar'),
         headless: true,
         defaultViewport: {
           width: 1280,
@@ -27,12 +27,13 @@ export async function GET(request: NextRequest) {
       });
     } else {
       // Local development: try to find local Chrome/Chromium
-      // This path is common for Chrome on macOS. Users might need to adjust this.
       const localExecutablePath = process.env.PUPPETEER_EXECUTABLE_PATH ||
-                                  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'; // Common macOS path
+        (process.platform === 'darwin'
+          ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+          : undefined); // Add other OS paths as needed
 
       browser = await puppeteer.launch({
-        args: ['--no-sandbox', '--disable-setuid-sandbox'], // Recommended args for local as well
+        args: ['--hide-scrollbars', '--mute-audio'],
         executablePath: localExecutablePath,
         headless: true,
       });
@@ -40,10 +41,12 @@ export async function GET(request: NextRequest) {
 
     const page = await browser.newPage();
 
+    // Navigate to the print-specific job guide page.
     const baseUrl = request.nextUrl.origin;
     const url = `${baseUrl}/${lang}/it-job-guide/print`;
     await page.goto(url, { waitUntil: 'networkidle0' });
 
+    // Generate PDF
     const pdf = await page.pdf({
       format: 'A4',
       printBackground: true,
@@ -60,14 +63,11 @@ export async function GET(request: NextRequest) {
     return new NextResponse(pdf, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="guia-trabajo-it-nz.pdf"',
+        'Content-Disposition': 'attachment; filename="job-guide.pdf"',
       },
     });
   } catch (error) {
-    const errorMessage = isVercel 
-      ? `PDF generation failed on Vercel: ${error instanceof Error ? error.message : String(error)}`
-      : `PDF generation failed on local: ${error instanceof Error ? error.message : String(error)}`;
-    console.error(errorMessage);
-    return new NextResponse(errorMessage, { status: 500 });
+    console.error('PDF generation failed:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 } 
