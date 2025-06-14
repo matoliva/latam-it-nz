@@ -16,6 +16,11 @@ export async function GET(request: NextRequest) {
         args: [...chromium.args, '--hide-scrollbars', '--mute-audio'],
         executablePath: await chromium.executablePath(),
         headless: true,
+        defaultViewport: {
+          width: 1280,
+          height: 720,
+          deviceScaleFactor: 1,
+        },
       });
     } else {
       // Local development: try to find local Chrome/Chromium
@@ -56,8 +61,10 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('PDF generation failed on local:', error);
-    // Return an error response to the client
-    return new NextResponse(`PDF generation failed: ${error instanceof Error ? error.message : String(error)}`, { status: 500 });
+    const errorMessage = isVercel 
+      ? `PDF generation failed on Vercel: ${error instanceof Error ? error.message : String(error)}`
+      : `PDF generation failed on local: ${error instanceof Error ? error.message : String(error)}`;
+    console.error(errorMessage);
+    return new NextResponse(errorMessage, { status: 500 });
   }
 } 
