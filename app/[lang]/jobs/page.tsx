@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FileText, Clock, Users, MapPin, Calendar, Code, Banknote } from 'lucide-react';
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 
 interface Technology {
   id: string;
@@ -17,15 +18,15 @@ interface JobPosition {
   sponsor?: boolean;
   rating?: number;
   publishedDate: string;
-  description?: any; // RichText type from Payload
+  description?: SerializedEditorState;
   jobImage?: { url: string; };
-  technologies?: string[] | Technology[]; // Update this to reflect both possible states
+  technologies?: string[] | Technology[];
   jobType?: string;
   experienceLevel?: string;
   salaryRange?: string;
-  responsibilities?: any;
-  qualifications?: any;
-  benefits?: any;
+  responsibilities?: SerializedEditorState;
+  qualifications?: SerializedEditorState;
+  benefits?: SerializedEditorState;
   locationType?: string;
   city?: string;
   stateProvince?: string;
@@ -34,7 +35,7 @@ interface JobPosition {
   applicationUrl?: string;
   applicationEmail?: string;
   applicationDeadline?: string;
-  companyDescription?: any;
+  companyDescription?: SerializedEditorState;
   companyWebsite?: string;
   companyLogo?: { url: string; };
   slug: string;
@@ -61,14 +62,13 @@ interface TechnologiesResponse {
 
 async function getJobPositions(): Promise<JobPosition[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/job-positions`, { cache: 'no-store' }); // Removed depth=1
+    const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/job-positions`, { cache: 'no-store' });
     if (!res.ok) {
       throw new Error(`Failed to fetch job positions: ${res.statusText}`);
     }
     const data: JobPositionsResponse = await res.json();
     return data.docs;
   } catch (error) {
-    console.error("Error fetching job positions:", error);
     return [];
   }
 }
@@ -77,7 +77,6 @@ async function getTechnologiesByIds(ids: string[]): Promise<Map<string, Technolo
   if (ids.length === 0) return new Map();
 
   try {
-    // Build a comma-separated string of IDs for the 'where' clause
     const idQuery = ids.join(',');
     const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/technologies?where[id][in]=${idQuery}`, { cache: 'no-store' });
     if (!res.ok) {
@@ -88,7 +87,6 @@ async function getTechnologiesByIds(ids: string[]): Promise<Map<string, Technolo
     data.docs.forEach(tech => technologiesMap.set(tech.id, tech));
     return technologiesMap;
   } catch (error) {
-    console.error("Error fetching technologies:", error);
     return new Map();
   }
 }
@@ -97,14 +95,13 @@ export default async function JobsPage({ params }: { params: { lang: string } })
   const { lang } = params;
   const jobPositions = await getJobPositions();
 
-  // Extract all unique technology IDs
   const technologyIds = new Set<string>();
   jobPositions.forEach(job => {
     if (Array.isArray(job.technologies)) {
       job.technologies.forEach(tech => {
-        if (typeof tech === 'string') { // If it's still an ID
+        if (typeof tech === 'string') {
           technologyIds.add(tech);
-        } else { // If it's already a populated object (unlikely, but for safety)
+        } else {
           technologyIds.add(tech.id);
         }
       });
@@ -113,13 +110,12 @@ export default async function JobsPage({ params }: { params: { lang: string } })
 
   const technologiesMap = await getTechnologiesByIds(Array.from(technologyIds));
 
-  // Map technology IDs to full technology objects
   const populatedJobPositions = jobPositions.map(job => {
     if (Array.isArray(job.technologies)) {
       const populatedTechnologies = job.technologies.map(tech => {
         const techId = typeof tech === 'string' ? tech : tech.id;
-        return technologiesMap.get(techId) || { id: techId, name: 'Unknown Technology' }; // Fallback
-      }).filter(Boolean) as Technology[]; // Filter out any undefineds and cast
+        return technologiesMap.get(techId) || { id: techId, name: 'Unknown Technology' };
+      }).filter(Boolean) as Technology[];
 
       return { ...job, technologies: populatedTechnologies };
     }
@@ -163,7 +159,7 @@ export default async function JobsPage({ params }: { params: { lang: string } })
                     )}
                     {job.locationType && (
                       <Badge variant="outline" className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 text-xs">
-                        <MapPin className="h-3 w-3 mr-1" /> {job.locationType}
+                        <MapPin className="h-4 w-4 mr-1" /> {job.locationType}
                       </Badge>
                     )}
                   </div>
