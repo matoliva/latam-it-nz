@@ -91,12 +91,8 @@ async function getTechnologiesByIds(ids: string[]): Promise<Map<string, Technolo
   }
 }
 
-interface JobsPageProps {
-  params: { lang: string };
-}
-
-export default async function JobsPage({ params }: JobsPageProps) {
-  const { lang } = params;
+export default async function JobsPage({ params }: { params: Promise<any> }) {
+  const { lang } = await params;
   const jobPositions = await getJobPositions();
 
   const technologyIds = new Set<string>();
