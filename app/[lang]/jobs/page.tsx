@@ -68,6 +68,7 @@ async function getJobPositions(): Promise<JobPosition[]> {
     }
     const data: JobPositionsResponse = await res.json();
     return data.docs;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch {
     return [];
   }
@@ -86,11 +87,13 @@ async function getTechnologiesByIds(ids: string[]): Promise<Map<string, Technolo
     const technologiesMap = new Map<string, Technology>();
     data.docs.forEach(tech => technologiesMap.set(tech.id, tech));
     return technologiesMap;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch {
     return new Map();
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function JobsPage({ params }: { params: Promise<any> }) {
   const { lang } = await params;
   const jobPositions = await getJobPositions();
