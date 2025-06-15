@@ -68,7 +68,7 @@ async function getJobPositions(): Promise<JobPosition[]> {
     }
     const data: JobPositionsResponse = await res.json();
     return data.docs;
-  } catch (error) {
+  } catch {
     return [];
   }
 }
@@ -86,7 +86,7 @@ async function getTechnologiesByIds(ids: string[]): Promise<Map<string, Technolo
     const technologiesMap = new Map<string, Technology>();
     data.docs.forEach(tech => technologiesMap.set(tech.id, tech));
     return technologiesMap;
-  } catch (error) {
+  } catch {
     return new Map();
   }
 }
