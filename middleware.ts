@@ -4,17 +4,8 @@ import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 
 function getLocale(request: NextRequest): string | undefined {
-  const negotiatorHeaders: Record<string, string> = {};
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
-
-  const locales = i18n.locales;
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-
-  try {
-    return matchLocale(languages, locales, i18n.defaultLocale);
-  } catch (error) {
-    return i18n.defaultLocale;
-  }
+  // Always return the default locale ('es'), ignoring browser preferences
+  return i18n.defaultLocale;
 }
 
 export function middleware(request: NextRequest) {

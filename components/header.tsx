@@ -9,7 +9,6 @@ import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Locale } from '@/i18n.config';
-import BuyMeCoffeeButton from './buy-me-coffee-button';
 
 import logo from '@/public/images/logo.png';
 
@@ -31,8 +30,9 @@ export function Header({ lang, translations }: HeaderProps) {
   const navigation = [
     { name: translations.navigation.home, href: `/${lang}` },
     { name: translations.navigation.bookSession, href: '#booking' },
-    { name: translations.navigation.about, href: '#more-info' },
+    { name: translations.navigation.about, href: `/${lang}#more-info` },
     // { name: translations.navigation.openPositions, href: '#positions' },
+    { name: lang === 'es' ? 'Guía IT' : 'IT Guide', href: `/${lang}/it-job-guide` },
   ];
 
   // Prevent body scroll when menu is open
@@ -69,23 +69,38 @@ export function Header({ lang, translations }: HeaderProps) {
             </div>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex space-x-8">
-              {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-base font-medium transition-colors hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                >
-                  {item.name}
-                </Link>
-              ))}
+            <nav className="hidden md:flex space-x-8 items-center">
+              {navigation.map((item) => {
+                const isGuide = item.name === 'Guía IT' || item.name === 'IT Guide';
+                if (isGuide) {
+                  return (
+                    <Button
+                      key={item.href}
+                      asChild
+                      variant="default"
+                      className="text-base font-bold shadow-md h-10 px-4 rounded-md"
+                    >
+                      <Link href={item.href} className="flex items-center h-10">
+                        {item.name}
+                      </Link>
+                    </Button>
+                  );
+                }
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-base font-medium transition-colors hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })} 
             </nav>
 
             {/* Right side controls */}
             <div className="flex items-center gap-4">
-              <div className="hidden md:block">
-                <BuyMeCoffeeButton variant="header" />
-              </div>
+              
               <ThemeToggle />
               <LanguageSelector lang={lang} />
               {/* Mobile menu button */}
@@ -140,19 +155,33 @@ export function Header({ lang, translations }: HeaderProps) {
           onClick={(e) => e.stopPropagation()} // Prevent clicks from closing the menu
         >
           <nav className="flex flex-col items-center space-y-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-3xl font-medium transition-colors hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="mt-4">
-              <BuyMeCoffeeButton variant="header" />
-            </div>
+            {navigation.map((item) => {
+              const isGuide = item.name === 'Guía IT' || item.name === 'IT Guide';
+              if (isGuide) {
+                return (
+                  <Button
+                    key={item.href}
+                    asChild
+                    variant="default"
+                    className="text-3xl font-bold shadow-md h-12 px-6 rounded-md"
+                  >
+                    <Link href={item.href} onClick={() => setMobileMenuOpen(false)} className="flex items-center h-12">
+                      {item.name}
+                    </Link>
+                  </Button>
+                );
+              }
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-3xl font-medium transition-colors hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })} 
           </nav>
         </div>
       </div>

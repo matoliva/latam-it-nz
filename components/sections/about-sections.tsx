@@ -10,7 +10,7 @@ export default async function AboutSection({ lang }: AboutSectionProps) {
     const dict = await getDictionary(lang);
 
     return (
-        <section id="about" className="py-16 pt-32 bg-background">
+        <section id="about" className="py-16 pt-16 md:pt-32 bg-background">
             <div className="container px-6 mx-auto max-w-3xl">
                 <div className="space-y-10 text-center">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">

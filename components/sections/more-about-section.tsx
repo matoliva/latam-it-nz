@@ -26,10 +26,10 @@ export default async function MoreAboutSection({ lang }: MoreAboutSectionProps) 
                         />
                     </div>
                     <div className="space-y-8 order-1 md:order-2">
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center">
                             {dict.moreAbout.title}
                         </h2>
-                        <div className="space-y-4 text-lg text-muted-foreground">
+                        <div className="space-y-4 text-lg text-muted-foreground text-center">
                             <p>{dict.moreAbout.description1}</p>
                             <p>{dict.moreAbout.description2}</p>
                             <p>{dict.moreAbout.description3}</p>
