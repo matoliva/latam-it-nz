@@ -160,7 +160,12 @@ export const JobPositions: CollectionConfig = {
         position: 'sidebar',
       },
       hooks: {
-        beforeValidate: [({ data }: { data: { jobTitle: string } }) => data.jobTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')],
+        beforeValidate: [({ data }) => {
+  const jobTitle = data?.jobTitle;
+  return typeof jobTitle === 'string'
+    ? jobTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+    : '';
+}],
       },
     },
     {
