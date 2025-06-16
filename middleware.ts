@@ -1,31 +1,38 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { i18n } from './i18n.config';
-import { match as matchLocale } from '@formatjs/intl-localematcher';
-import Negotiator from 'negotiator';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-function getLocale(request: NextRequest): string | undefined {
-  // Always return the default locale ('es'), ignoring browser preferences
-  return i18n.defaultLocale;
-}
+const PUBLIC_FILE = /\.(.*)$/;
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  );
+  const url = request.nextUrl;
 
-  // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname}`, request.url)
-    );
+  // Check if the request is for a public file (e.g., .js, .css, .png)
+  if (PUBLIC_FILE.test(url.pathname)) {
+    return NextResponse.next();
   }
+
+  // Check if the path starts with a language code (e.g., /es, /en)
+  const parts = url.pathname.split('/');
+  const hasLang = parts.length > 1 && (parts[1] === 'es' || parts[1] === 'en');
+
+  // If no language is present, redirect to default language (Spanish)
+  if (!hasLang) {
+    const newUrl = new URL(`/es${url.pathname}`, request.url);
+    return NextResponse.redirect(newUrl);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    '/',
-    '/((?!api|_next/static|_next/image|favicon.ico|admin).*)$'
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };
