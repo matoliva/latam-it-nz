@@ -6,17 +6,17 @@ const PUBLIC_FILE = /\.(.*)$/;
 export function middleware(request: NextRequest) {
   const url = request.nextUrl;
 
-  // Check if the path starts with a language code (e.g., /es, /en)
-  const parts = url.pathname.split('/');
-  const hasLang = parts.length > 1 && (parts[1] === 'es' || parts[1] === 'en');
-
   // Check if the request is for a public file (e.g., .js, .css, .png)
   if (PUBLIC_FILE.test(url.pathname)) {
     return NextResponse.next();
   }
 
-  // If no language is present and it's not a public file, redirect to default language (Spanish)
-  if (!hasLang && url.pathname !== '/') {
+  // Check if the path starts with a language code (e.g., /es, /en)
+  const parts = url.pathname.split('/');
+  const hasLang = parts.length > 1 && (parts[1] === 'es' || parts[1] === 'en');
+
+  // If no language is present, redirect to default language (Spanish)
+  if (!hasLang) {
     const newUrl = new URL(`/es${url.pathname}`, request.url);
     return NextResponse.redirect(newUrl);
   }
