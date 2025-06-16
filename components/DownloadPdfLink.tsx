@@ -1,13 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from "lucide-react";
 
-export default function DownloadPdfLink() {
-  const params = useParams();
-  const lang = params.lang || 'es';
+export default function DownloadPdfLink({ lang = 'es' }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDownload = async () => {
