@@ -57,6 +57,24 @@ async function getJobPositions(): Promise<JobPost[]> {
   }
 }
 
+// Helper to extract plain text from Payload rich text
+function extractPlainTextFromPayloadRichText(richText: any): string {
+  if (!richText || typeof richText !== 'object') return '';
+  // Payload rich text root is usually { root: { children: [...] } }
+  const root = richText.root || richText;
+  let text = '';
+  if (Array.isArray(root.children)) {
+    for (const child of root.children) {
+      if (child.type === 'paragraph' && Array.isArray(child.children)) {
+        for (const grandChild of child.children) {
+          if (grandChild.text) text += grandChild.text + '\n';
+        }
+      }
+    }
+  }
+  return text.trim();
+}
+
 export default async function JobsPage({ params }: { params: Promise<any> }) {
   const { lang } = await params;
   const jobPositions = await getJobPositions();
@@ -123,7 +141,7 @@ export default async function JobsPage({ params }: { params: Promise<any> }) {
                   {job.description && (
                     <div className="mt-4 pt-4 border-t text-muted-foreground">
                       <h3 className="text-lg font-medium mb-2">Description:</h3>
-                      <div>{typeof job.description === 'string' ? job.description : JSON.stringify(job.description)}</div>
+                      <div>{typeof job.description === 'string' ? job.description : extractPlainTextFromPayloadRichText(job.description)}</div>
                     </div>
                   )}
                   {job.technologies && job.technologies.length > 0 && (
