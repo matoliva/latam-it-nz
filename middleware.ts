@@ -11,9 +11,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Only redirect the root path '/' to '/es'
-  if (url.pathname === '/') {
-    const newUrl = new URL('/es', request.url);
+  // Supported languages
+  const supportedLangs = ['es', 'en']; // Add more if needed
+  const pathSegments = url.pathname.split('/').filter(Boolean);
+  const firstSegment = pathSegments[0];
+
+  // If the first segment is not a supported language, redirect to default lang
+  if (!supportedLangs.includes(firstSegment)) {
+    const newPath = ['/es', ...pathSegments].join('/').replace(/\/+/g, '/');
+    const newUrl = new URL(newPath.startsWith('/') ? newPath : '/' + newPath, request.url);
     return NextResponse.redirect(newUrl);
   }
 
