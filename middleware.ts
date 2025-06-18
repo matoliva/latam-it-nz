@@ -11,13 +11,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check if the path starts with a language code (e.g., /es, /en)
-  const parts = url.pathname.split('/');
-  const hasLang = parts.length > 1 && (parts[1] === 'es' || parts[1] === 'en');
-
-  // If no language is present, redirect to default language (Spanish)
-  if (!hasLang) {
-    const newUrl = new URL(`/es${url.pathname}`, request.url);
+  // Only redirect the root path '/' to '/es'
+  if (url.pathname === '/') {
+    const newUrl = new URL('/es', request.url);
     return NextResponse.redirect(newUrl);
   }
 

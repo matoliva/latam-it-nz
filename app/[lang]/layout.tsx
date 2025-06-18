@@ -146,7 +146,7 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body 
-        className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}
+        className={cn("min-h-screen flex flex-col bg-background font-sans antialiased", inter.className)}
         suppressHydrationWarning
       >
         <ThemeProvider
@@ -156,7 +156,9 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Header lang={lang} translations={dictionary} />
-          {children}
+          <main className="flex-1 flex flex-col">
+            {children}
+          </main>
           <Footer lang={lang} translations={dictionary} />
           <Analytics />
         </ThemeProvider>

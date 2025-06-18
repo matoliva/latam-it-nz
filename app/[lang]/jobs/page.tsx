@@ -1,50 +1,34 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FileText, Clock, Users, MapPin, Calendar, Code, Banknote } from 'lucide-react';
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
+import { Clock, Users, MapPin, Calendar, Code, Banknote, Star } from 'lucide-react';
 
-interface Technology {
-  id: string;
-  name: string;
-}
-
-interface JobPosition {
-  id: string;
-  jobTitle: string;
-  company: string;
-  jobPortal?: string;
-  sponsor?: boolean;
-  rating?: number;
-  publishedDate: string;
-  description?: SerializedEditorState;
-  jobImage?: { url: string; };
-  technologies?: string[] | Technology[];
-  jobType?: string;
-  experienceLevel?: string;
-  salaryRange?: string;
-  responsibilities?: SerializedEditorState;
-  qualifications?: SerializedEditorState;
-  benefits?: SerializedEditorState;
-  locationType?: string;
-  city?: string;
-  stateProvince?: string;
-  country?: string;
-  timezone?: string;
-  applicationUrl?: string;
-  applicationEmail?: string;
-  applicationDeadline?: string;
-  companyDescription?: SerializedEditorState;
-  companyWebsite?: string;
-  companyLogo?: { url: string; };
-  slug: string;
-  seoTitle?: string;
-  seoDescription?: string;
+export interface JobPost {
+  id?: string;
+  title?: string;
+  description?: string;
+  location?: string;
+  modality?: 'onsite' | 'hybrid' | 'remote';
+  isSponsorAvailable?: boolean;
+  publishedAt?: string;
+  technologies?: string[];
+  companyImageUrl?: string;
+  companyName?: string;
+  jobPostUrl?: string;
+  salary?: string;
+  jobType?: 'full-time' | 'part-time' | 'contractor';
+  seniorityLevel?: 'junior' | 'mid' | 'senior' | 'lead';
+  reviews?: number;
+  referral?: {
+    name?: string;
+    phone?: string;
+    email?: string;
+  };
 }
 
 interface JobPositionsResponse {
-  docs: JobPosition[];
+  docs: JobPost[];
   totalDocs: number;
   limit: number;
   totalPages: number;
@@ -56,97 +40,45 @@ interface JobPositionsResponse {
   nextPage: number | null;
 }
 
-interface TechnologiesResponse {
-  docs: Technology[];
-}
-
-async function getJobPositions(): Promise<JobPosition[]> {
+async function getJobPositions(): Promise<JobPost[]> {
+  console.log('getJobPositions called');
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/job-positions`, { cache: 'no-store' });
+    console.log('Response status:', res.status);
     if (!res.ok) {
       throw new Error(`Failed to fetch job positions: ${res.statusText}`);
     }
     const data: JobPositionsResponse = await res.json();
+    console.log('jobPositions data:', data);
     return data.docs;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch {
+  } catch (err) {
+    console.error('Error fetching job positions:', err);
     return [];
   }
 }
 
-async function getTechnologiesByIds(ids: string[]): Promise<Map<string, Technology>> {
-  if (ids.length === 0) return new Map();
-
-  try {
-    const idQuery = ids.join(',');
-    const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/technologies?where[id][in]=${idQuery}`, { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error(`Failed to fetch technologies: ${res.statusText}`);
-    }
-    const data: TechnologiesResponse = await res.json();
-    const technologiesMap = new Map<string, Technology>();
-    data.docs.forEach(tech => technologiesMap.set(tech.id, tech));
-    return technologiesMap;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch {
-    return new Map();
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function JobsPage({ params }: { params: Promise<any> }) {
   const { lang } = await params;
   const jobPositions = await getJobPositions();
 
-  const technologyIds = new Set<string>();
-  jobPositions.forEach(job => {
-    if (Array.isArray(job.technologies)) {
-      job.technologies.forEach(tech => {
-        if (typeof tech === 'string') {
-          technologyIds.add(tech);
-        } else {
-          technologyIds.add(tech.id);
-        }
-      });
-    }
-  });
-
-  const technologiesMap = await getTechnologiesByIds(Array.from(technologyIds));
-
-  const populatedJobPositions = jobPositions.map(job => {
-    if (Array.isArray(job.technologies)) {
-      const populatedTechnologies = job.technologies.map(tech => {
-        const techId = typeof tech === 'string' ? tech : tech.id;
-        return technologiesMap.get(techId) || { id: techId, name: 'Unknown Technology' };
-      }).filter(Boolean) as Technology[];
-
-      return { ...job, technologies: populatedTechnologies };
-    }
-    return job;
-  });
-
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Open Job Positions ({lang.toUpperCase()})</h1>
+      <h1 className="text-3xl font-bold mb-6">Open Job Positions</h1>
       {
-        populatedJobPositions.length === 0 ? (
+        jobPositions.length === 0 ? (
           <p>No job positions found at the moment.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {populatedJobPositions.map((job) => (
+            {jobPositions.map((job) => (
               <Card key={job.id} className="flex flex-col">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-bold">{job.jobTitle}</CardTitle>
-                  <CardDescription className="flex items-center text-sm text-muted-foreground">
-                    <FileText className="h-4 w-4 mr-1" />
-                    {job.company}
-                    {job.jobPortal && (
-                      <>
-                        <span className="mx-1">•</span>
-                        <Badge variant="outline" className="text-xs py-0.5 px-2">{job.jobPortal}</Badge>
-                      </>
+                  <CardTitle className="text-2xl font-bold">{job.title}</CardTitle>
+                  <div className="flex items-center text-sm text-muted-foreground gap-2">
+                    {job.companyName && <span>{job.companyName}</span>}
+                    {job.isSponsorAvailable && (
+                      <Badge variant="outline" className="text-xs py-0.5 px-2 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">Sponsor</Badge>
                     )}
-                  </CardDescription>
+                  </div>
                 </CardHeader>
                 <CardContent className="flex-grow space-y-2 text-foreground">
                   <div className="flex flex-wrap gap-1">
@@ -155,78 +87,78 @@ export default async function JobsPage({ params }: { params: Promise<any> }) {
                         <Clock className="h-3 w-3 mr-1" /> {job.jobType}
                       </Badge>
                     )}
-                    {job.experienceLevel && (
+                    {job.seniorityLevel && (
                       <Badge variant="outline" className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 text-xs">
-                        <Users className="h-3 w-3 mr-1" /> {job.experienceLevel}
+                        <Users className="h-3 w-3 mr-1" /> {job.seniorityLevel}
                       </Badge>
                     )}
-                    {job.locationType && (
+                    {job.modality && (
                       <Badge variant="outline" className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 text-xs">
-                        <MapPin className="h-4 w-4 mr-1" /> {job.locationType}
+                        <MapPin className="h-4 w-4 mr-1" /> {job.modality}
                       </Badge>
                     )}
                   </div>
-
                   <div className="flex flex-col gap-2">
-                    {job.city && (
+                    {job.location && (
                       <div className="flex items-center text-base text-muted-foreground">
-                        <MapPin className="h-4 w-4 mr-1" /> {job.city}
+                        <MapPin className="h-4 w-4 mr-1" /> {job.location}
                       </div>
                     )}
-                    {job.salaryRange && (
+                    {job.salary && (
                       <div className="flex items-center text-base text-muted-foreground">
-                        <Banknote className="h-4 w-4 mr-1" /> {job.salaryRange}
+                        <Banknote className="h-4 w-4 mr-1" /> {job.salary}
                       </div>
                     )}
                   </div>
-
-                  {job.publishedDate && (
+                  {job.publishedAt && (
                     <div className="flex items-center text-sm text-muted-foreground">
-                      <Calendar className="h-4 w-4 mr-1" /> Posted on {new Date(job.publishedDate).toLocaleDateString()}
+                      <Calendar className="h-4 w-4 mr-1" /> Posted on {new Date(job.publishedAt).toLocaleDateString()}
                     </div>
                   )}
-
+                  {job.reviews && (
+                    <div className="flex items-center text-sm text-muted-foreground">
+                      <Star className="h-4 w-4 mr-1 text-yellow-500" /> {job.reviews} / 5
+                    </div>
+                  )}
                   {job.description && (
                     <div className="mt-4 pt-4 border-t text-muted-foreground">
                       <h3 className="text-lg font-medium mb-2">Description:</h3>
+                      <div>{typeof job.description === 'string' ? job.description : JSON.stringify(job.description)}</div>
                     </div>
                   )}
-
-                  {job.responsibilities && (
-                    <div className="mt-4 pt-4 border-t text-muted-foreground">
-                      <h3 className="text-lg font-medium mb-2">Responsibilities:</h3>
-                    </div>
-                  )}
-
-                  {job.qualifications && (
-                    <div className="mt-4 pt-4 border-t text-muted-foreground">
-                      <h3 className="text-lg font-medium mb-2">Qualifications:</h3>
-                    </div>
-                  )}
-
-                  {job.benefits && (
-                    <div className="mt-4 pt-4 border-t text-muted-foreground">
-                      <h3 className="text-lg font-medium mb-2">Benefits:</h3>
-                    </div>
-                  )}
-
                   {job.technologies && job.technologies.length > 0 && (
                     <div className="mt-4 pt-4 border-t">
                       <h3 className="text-lg font-medium flex items-center mb-2">
                         <Code className="h-5 w-5 mr-2" /> Technologies:
                       </h3>
                       <div className="flex flex-wrap gap-2 mt-1">
-                        {(job.technologies as Technology[]).map((tech) => (
-                          <Badge key={tech.id} variant="secondary">{tech.name}</Badge>
-                        ))}
+                        {job.technologies.map((techObj, idx) => {
+                          if (typeof techObj === 'string') {
+                            return <Badge key={idx} variant="secondary">{techObj}</Badge>;
+                          } else if (typeof techObj === 'object' && techObj !== null) {
+                            const obj = techObj as any;
+                            return <Badge key={obj.id || idx} variant="secondary">{obj.technology}</Badge>;
+                          }
+                          return null;
+                        })}
                       </div>
                     </div>
                   )}
+                  {job.referral && (job.referral.name || job.referral.phone || job.referral.email) && (
+                    <div className="mt-4 pt-4 border-t">
+                      <h3 className="text-lg font-medium mb-2">Referral Information:</h3>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        {job.referral.name && <li><strong>Name:</strong> {job.referral.name}</li>}
+                        {job.referral.phone && <li><strong>Phone:</strong> {job.referral.phone}</li>}
+                        {job.referral.email && <li><strong>Email:</strong> {job.referral.email}</li>}
+                      </ul>
+                    </div>
+                  )}
                 </CardContent>
-                {job.applicationUrl && (
+                {job.jobPostUrl && (
                   <CardFooter className="mt-auto">
                     <Button asChild>
-                      <a href={job.applicationUrl} target="_blank" rel="noopener noreferrer">
+                      <a href={job.jobPostUrl} target="_blank" rel="noopener noreferrer">
                         Apply Now
                       </a>
                     </Button>
