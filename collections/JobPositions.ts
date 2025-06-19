@@ -3,7 +3,7 @@ import type { CollectionConfig } from 'payload';
 export const JobPositions: CollectionConfig = {
   slug: 'job-positions',
   admin: {
-    useAsTitle: 'jobTitle',
+    useAsTitle: 'title',
     description: 'Manage open job positions.',
   },
   access: {
@@ -11,33 +11,8 @@ export const JobPositions: CollectionConfig = {
   },
   fields: [
     {
-      name: 'jobTitle',
+      name: 'title',
       type: 'text',
-      required: true,
-    },
-    {
-      name: 'company',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'jobPortal',
-      type: 'text',
-    },
-    {
-      name: 'sponsor',
-      type: 'checkbox',
-      defaultValue: false,
-    },
-    {
-      name: 'rating',
-      type: 'number',
-      min: 1,
-      max: 5,
-    },
-    {
-      name: 'publishedDate',
-      type: 'date',
       required: true,
     },
     {
@@ -45,15 +20,61 @@ export const JobPositions: CollectionConfig = {
       type: 'richText',
     },
     {
-      name: 'jobImage',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'location',
+      type: 'text',
+    },
+    {
+      name: 'modality',
+      type: 'select',
+      options: [
+        { label: 'Onsite', value: 'onsite' },
+        { label: 'Hybrid', value: 'hybrid' },
+        { label: 'Remote', value: 'remote' },
+      ],
+    },
+    {
+      name: 'isSponsorAvailable',
+      type: 'checkbox',
+      defaultValue: false,
+    },
+    {
+      name: 'publishedAt',
+      type: 'date',
     },
     {
       name: 'technologies',
-      type: 'relationship',
-      relationTo: 'technologies',
-      hasMany: true,
+      type: 'array',
+      fields: [
+        {
+          name: 'technology',
+          type: 'text',
+        },
+      ],
+    },
+    {
+      name: 'companyImageUrl',
+      type: 'text',
+      admin: {
+        description: 'URL of the company image/logo',
+      },
+    },
+    {
+      name: 'companyName',
+      type: 'text',
+    },
+    {
+      name: 'jobPostUrl',
+      type: 'text',
+      admin: {
+        description: 'URL to the job post',
+      },
+    },
+    {
+      name: 'salary',
+      type: 'text',
+      admin: {
+        description: 'e.g., $100,000 - $120,000',
+      },
     },
     {
       name: 'jobType',
@@ -61,122 +82,45 @@ export const JobPositions: CollectionConfig = {
       options: [
         { label: 'Full-time', value: 'full-time' },
         { label: 'Part-time', value: 'part-time' },
-        { label: 'Contract', value: 'contract' },
-        { label: 'Internship', value: 'internship' },
+        { label: 'Contractor', value: 'contractor' },
       ],
     },
     {
-      name: 'experienceLevel',
+      name: 'seniorityLevel',
       type: 'select',
       options: [
-        { label: 'Entry-level', value: 'entry-level' },
-        { label: 'Mid-level', value: 'mid-level' },
+        { label: 'Junior', value: 'junior' },
+        { label: 'Mid', value: 'mid' },
         { label: 'Senior', value: 'senior' },
-        { label: 'Director', value: 'director' },
+        { label: 'Lead', value: 'lead' },
       ],
     },
     {
-      name: 'salaryRange',
-      type: 'text',
-      admin: {
-        description: 'e.g., $50,000 - $70,000 USD',
-      },
+      name: 'reviews',
+      type: 'number',
+      min: 1,
+      max: 5,
     },
     {
-      name: 'responsibilities',
-      type: 'richText',
-    },
-    {
-      name: 'qualifications',
-      type: 'richText',
-    },
-    {
-      name: 'benefits',
-      type: 'richText',
-    },
-    {
-      name: 'locationType',
-      type: 'select',
-      options: [
-        { label: 'On-site', value: 'on-site' },
-        { label: 'Remote', value: 'remote' },
-        { label: 'Hybrid', value: 'hybrid' },
+      name: 'referral',
+      type: 'group',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+        },
+        {
+          name: 'phone',
+          type: 'text',
+        },
+        {
+          name: 'email',
+          type: 'text',
+        },
       ],
-    },
-    {
-      name: 'city',
-      type: 'text',
-    },
-    {
-      name: 'stateProvince',
-      type: 'text',
-    },
-    {
-      name: 'country',
-      type: 'text',
-    },
-    {
-      name: 'timezone',
-      type: 'text',
       admin: {
-        condition: (_: unknown, siblingData: { locationType?: string }) => siblingData.locationType === 'remote',
-        description: 'e.g., America/New_York',
+        description: 'Optional referral information',
       },
-    },
-    {
-      name: 'applicationUrl',
-      type: 'text',
-      label: 'Application URL',
-    },
-    {
-      name: 'applicationEmail',
-      type: 'email',
-      label: 'Application Email',
-    },
-    {
-      name: 'applicationDeadline',
-      type: 'date',
-    },
-    {
-      name: 'companyDescription',
-      type: 'richText',
-    },
-    {
-      name: 'companyWebsite',
-      type: 'text',
-      label: 'Company Website',
-    },
-    {
-      name: 'companyLogo',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      unique: true,
-      admin: {
-        readOnly: true,
-        position: 'sidebar',
-      },
-      hooks: {
-        beforeValidate: [({ data }) => {
-  const jobTitle = data?.jobTitle;
-  return typeof jobTitle === 'string'
-    ? jobTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-    : '';
-}],
-      },
-    },
-    {
-      name: 'seoTitle',
-      type: 'text',
-      label: 'SEO Title',
-    },
-    {
-      name: 'seoDescription',
-      type: 'textarea',
-      label: 'SEO Description',
     },
   ],
 }; 
