@@ -1,0 +1,40 @@
+name: E2E Playwright Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Wait for Vercel Deployment
+        id: vercel
+        uses: patrickedqvist/wait-for-vercel-preview@v1
+        with:
+          token: ${{ secrets.VERCEL_TOKEN }}
+          teamId: ${{ secrets.VERCEL_TEAM_ID }} # Optional, if you use Vercel teams
+          vercelProjectId: ${{ secrets.VERCEL_PROJECT_ID }}
+          maxTimeout: 600 # seconds
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        env:
+          E2E_BASE_URL: ${{ steps.vercel.outputs.url }}
+        run: npx playwright test 
