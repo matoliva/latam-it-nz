@@ -22,14 +22,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Wait for Vercel Deployment
+      - name: Wait for Vercel Preview Deployment
         id: vercel
-        uses: patrickedqvist/wait-for-vercel-preview@v1
+        uses: UnlyLab/wait-for-vercel-preview@v1
         with:
-          token: ${{ secrets.VERCEL_TOKEN }}
-          teamId: ${{ secrets.VERCEL_TEAM_ID }} # Optional, if you use Vercel teams
-          vercelProjectId: ${{ secrets.VERCEL_PROJECT_ID }}
-          maxTimeout: 600 # seconds
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          max-timeout: 600
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
