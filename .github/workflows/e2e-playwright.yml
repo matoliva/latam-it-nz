@@ -23,11 +23,10 @@ jobs:
         run: npm ci
 
       - name: Wait for Vercel Preview Deployment
-        id: vercel
-        uses: PatrickJS/wait-for-vercel@v1
+        id: waitFor200
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.2
         with:
-          token: ${{ secrets.VERCEL_TOKEN }}
-          url: 'https://vercel.com'
+          token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 600
 
       - name: Install Playwright Browsers
@@ -35,5 +34,5 @@ jobs:
 
       - name: Run Playwright tests
         env:
-          E2E_BASE_URL: ${{ steps.vercel.outputs.url }}
+          E2E_BASE_URL: ${{ steps.waitFor200.outputs.url }}
         run: npx playwright test 
