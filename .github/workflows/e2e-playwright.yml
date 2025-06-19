@@ -24,11 +24,11 @@ jobs:
 
       - name: Wait for Vercel Preview Deployment
         id: vercel
-        uses: UnlyLab/wait-for-vercel-preview@v1
+        uses: PatrickJS/wait-for-vercel@v1
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          max-timeout: 600
+          token: ${{ secrets.VERCEL_TOKEN }}
+          url: 'https://vercel.com'
+          max_timeout: 600
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
