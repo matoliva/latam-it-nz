@@ -16,13 +16,13 @@ export default async function Home({ params }: Props) {
   const dict = await getDictionary(lang);
 
   return (
-    <main className="flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div className="w-full">
         <AboutSection lang={lang} />
         <BookingSection translations={dict} />
         <BuyMeCoffeeSection translations={dict} />
         <MoreAboutSection lang={lang} />
       </div>
-    </main>
+    </div>
   );
 } 
