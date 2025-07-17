@@ -47,11 +47,36 @@ async function getJobPositions(): Promise<JobPost[]> {
     }
     const data: JobPositionsResponse = await res.json();
     console.log('jobPositions data:', data);
-    return data.docs;
+    
+    // Transform the data to match the expected interface
+    const transformedJobs: JobPost[] = data.docs.map(job => ({
+      ...job,
+      technologies: job.technologies?.map(tech => typeof tech === 'object' ? tech.technology : tech) || [],
+      description: typeof job.description === 'object' ? extractTextFromRichText(job.description) : job.description,
+    }));
+    
+    return transformedJobs;
   } catch (err) {
     console.error('Error fetching job positions:', err);
     return [];
   }
+}
+
+// Helper function to extract plain text from Payload's rich text format
+function extractTextFromRichText(richText: any): string {
+  if (!richText || !richText.root) return '';
+  
+  const extractText = (node: any): string => {
+    if (node.type === 'text') {
+      return node.text || '';
+    }
+    if (node.children) {
+      return node.children.map(extractText).join('');
+    }
+    return '';
+  };
+  
+  return richText.root.children?.map(extractText).join('\n') || '';
 }
 
 
