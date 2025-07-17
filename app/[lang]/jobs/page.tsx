@@ -1,6 +1,7 @@
 import React from 'react';
 import JobFilters from './JobFilters';
 
+// Interface for the transformed data used by the frontend
 export interface JobPost {
   id?: string;
   title?: string;
@@ -24,8 +25,41 @@ export interface JobPost {
   };
 }
 
-interface JobPositionsResponse {
-  docs: JobPost[];
+// Interface for PayloadCMS technology objects
+interface PayloadTechnology {
+  technology: string;
+  id: string;
+}
+
+// Interface for the raw PayloadCMS API response
+interface PayloadJobPost {
+  id?: string;
+  title?: string;
+  description?: any; // PayloadCMS rich text object
+  location?: string;
+  modality?: 'onsite' | 'hybrid' | 'remote';
+  isSponsorAvailable?: boolean;
+  publishedAt?: string;
+  technologies?: PayloadTechnology[];
+  companyImageUrl?: string;
+  companyName?: string;
+  jobPostUrl?: string;
+  salary?: string;
+  jobType?: 'full-time' | 'part-time' | 'contractor';
+  seniorityLevel?: 'junior' | 'mid' | 'senior' | 'lead';
+  reviews?: number;
+  referral?: {
+    name?: string;
+    phone?: string;
+    email?: string;
+  };
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+// Interface for the PayloadCMS API response
+interface PayloadJobPositionsResponse {
+  docs: PayloadJobPost[];
   totalDocs: number;
   limit: number;
   totalPages: number;
@@ -45,13 +79,13 @@ async function getJobPositions(): Promise<JobPost[]> {
     if (!res.ok) {
       throw new Error(`Failed to fetch job positions: ${res.statusText}`);
     }
-    const data: JobPositionsResponse = await res.json();
+    const data: PayloadJobPositionsResponse = await res.json();
     console.log('jobPositions data:', data);
     
     // Transform the data to match the expected interface
-    const transformedJobs: JobPost[] = data.docs.map(job => ({
+    const transformedJobs: JobPost[] = data.docs.map((job: PayloadJobPost): JobPost => ({
       ...job,
-      technologies: job.technologies?.map(tech => typeof tech === 'object' ? tech.technology : tech) || [],
+      technologies: job.technologies?.map((tech: PayloadTechnology) => tech.technology) || [],
       description: typeof job.description === 'object' ? extractTextFromRichText(job.description) : job.description,
     }));
     
