@@ -49,12 +49,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: 'Latam IT NZ | Your Guide to IT Jobs in New Zealand',
         description: 'Expert guidance for Latin American IT professionals looking to work in New Zealand. Get personalized advice on job search, visa processes, and career development.',
         siteName: 'Latam IT NZ',
+        images: [
+          {
+            url: '/images/logo.png',
+            width: 1200,
+            height: 630,
+            alt: 'Latam IT NZ Logo',
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Latam IT NZ | Your Guide to IT Jobs in New Zealand',
         description: 'Expert guidance for Latin American IT professionals looking to work in New Zealand. Get personalized advice on job search, visa processes, and career development.',
-        creator: '@matiasoliva',
+        creator: '@matoliva',
+        images: ['/images/logo.png'],
       },
       robots: {
         index: true,
@@ -102,12 +111,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: 'Latam IT NZ | Tu Guía para Trabajar en IT en Nueva Zelanda',
         description: 'Guía experta para profesionales latinoamericanos de IT que buscan trabajar en Nueva Zelanda. Obtén asesoramiento personalizado sobre búsqueda de trabajo, procesos de visa y desarrollo profesional.',
         siteName: 'Latam IT NZ',
+        images: [
+          {
+            url: '/images/logo.png',
+            width: 1200,
+            height: 630,
+            alt: 'Latam IT NZ Logo',
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Latam IT NZ | Tu Guía para Trabajar en IT en Nueva Zelanda',
         description: 'Guía experta para profesionales latinoamericanos de IT que buscan trabajar en Nueva Zelanda. Obtén asesoramiento personalizado sobre búsqueda de trabajo, procesos de visa y desarrollo profesional.',
-        creator: '@matiasoliva',
+        creator: '@matoliva',
+        images: ['/images/logo.png'],
       },
       robots: {
         index: true,
