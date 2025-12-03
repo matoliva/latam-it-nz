@@ -32,7 +32,7 @@ export function Footer({ lang, translations }: FooterProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Brand and Description */}
             <div className="space-y-4">
-              <Link href={`/${lang}`} className="text-xl font-bold">
+              <Link href={`/${lang}`} className="text-base font-semibold block mb-4">
                 Latam IT NZ
               </Link>
               <p className="text-muted-foreground">
@@ -94,4 +94,4 @@ export function Footer({ lang, translations }: FooterProps) {
       </div>
     </footer>
   );
-} 
+}
