@@ -1,38 +1,38 @@
 {
   "navigation": {
     "home": "Home",
-    "about": "About Me",
-    "bookSession": "Book a Session",
+    "about": "About me",
+    "bookSession": "Book a chat",
     "openPositions": "Open Positions",
     "moreInfo": "More Info",
     "contact": "Contact"
   },
   "common": {
     "welcome": "Welcome to Latam IT NZ",
-    "description": "Your gateway to IT opportunities in New Zealand"
+    "description": "Notes, tips, and real-life experience about tech in New Zealand"
   },
   "about": {
-    "title": "Latinos in NZ: how to get started in IT",
-    "description": "I'm Matías, a frontend developer living in New Zealand. If you're looking for your first IT job here or just want to understand how the market works, you can book a free call with me. I'll share my experience, useful resources, and practical tips. Did our chat help you out? You can support me with a coffee ☕ — no pressure 🙂",
-    "bookConsultation": "Book a Consultation",
-    "moreAboutMe": "More About Me",
-    "imageAlt": "Professional Recruiter"
+    "title": "Latinos in NZ: getting started in tech, without the fluff",
+    "description": "I'm Matías, a frontend developer living in New Zealand. If you're looking for your first tech job here, or just trying to understand how things work, we can have a free chat. I'll share what I learned, useful resources, and practical tips from my own experience.",
+    "bookConsultation": "Book a chat",
+    "moreAboutMe": "More about me",
+    "imageAlt": "Matías Oliva - Frontend Developer"
   },
   "moreAbout": {
-    "title": "My Journey in Tech",
-    "description1": "I started my journey in tech in Argentina, working as a frontend developer for several companies. Over time, I gained experience in different roles and technologies, and eventually decided to take the leap and move to New Zealand.",
-    "description2": "The transition wasn't easy, but it was worth it. I've worked with Kiwi companies both on-site and remotely, and I've learned a lot about the local tech industry, the job market, and what it takes to grow as an international developer in NZ.",
-    "description3": "Now, I'm passionate about helping other Latin American developers make their transition smoother. Whether you're just starting in tech or thinking about moving to New Zealand, I'm here to share what I've learned and guide you through the process.",
+    "title": "A bit about my path",
+    "description1": "I started in tech in Argentina, working as a frontend developer for different companies. After a few years, I decided to move to New Zealand and figure out how the local market worked from the inside.",
+    "description2": "It wasn't a straight line, but it taught me a lot. I've worked with Kiwi companies both in person and remotely, and I picked up useful lessons about interviews, CVs, culture, and the day-to-day of tech work here.",
+    "description3": "I don't have every answer, but I've been through many of these steps. If you're starting out in tech or thinking about moving to New Zealand, I can tell you what helped me and what I'd do differently.",
     "imageAlt": "Matías Oliva - Frontend Developer"
   },
   "booking": {
-    "title": "Book a Free Consultation",
-    "description": "Let's discuss your career goals and how I can help you find the perfect opportunity in New Zealand's IT industry.",
-    "scheduleButton": "Schedule time with me"
+    "title": "Let's have a chat",
+    "description": "Bring your questions about CVs, interviews, the local market, or your first steps in tech in New Zealand. We'll keep it simple and practical.",
+    "scheduleButton": "Pick a time"
   },
   "buyMeCoffee": {
-    "title": "Support My Work",
-    "description": "If you found our conversation helpful and would like to support my work, you can buy me a coffee. Your support helps me continue providing guidance to the Latin American tech community in New Zealand."
+    "title": "Support my work",
+    "description": "If something here helped you, you can buy me a coffee. It helps me keep sharing notes, resources, and time with the Latin American tech community in New Zealand."
   },
   "footer": {
     "rights": "All rights reserved.",
@@ -42,7 +42,7 @@
     "quickLinks": "Quick Links",
     "connect": "Connect",
     "about": "About",
-    "bookSession": "Book a Session",
+    "bookSession": "Book a chat",
     "openPositions": "Open Positions"
   }
-} 
+}

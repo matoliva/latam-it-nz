@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Locale } from "@/i18n.config";
+import { i18n, Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
 
 import { Analytics } from "@vercel/analytics/next"
@@ -14,17 +14,22 @@ const inter = Inter({ subsets: ['latin'] });
 
 interface Props {
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
+}
+
+function toLocale(lang: string): Locale {
+  return i18n.locales.includes(lang as Locale) ? (lang as Locale) : i18n.defaultLocale;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang: routeLang } = await params;
+  const lang = toLocale(routeLang);
   
   const metadata: Record<Locale, Metadata> = {
     en: {
-      title: "Latam IT NZ | Your Guide to IT Jobs in New Zealand",
-      description: "Expert guidance for Latin American IT professionals looking to work in New Zealand. Get personalized advice on job search, visa processes, and career development.",
-      keywords: "IT jobs New Zealand, Latin American tech jobs, NZ tech industry, IT recruitment NZ, tech career NZ, Latin American developers NZ",
+      title: "Latam IT NZ | A chat about tech in New Zealand",
+      description: "A simple free chat with Matías about finding your first tech job in New Zealand.",
+      keywords: "IT jobs New Zealand, Latin American tech jobs, NZ tech industry, tech career NZ, Latin American developers NZ, tech jobs NZ",
       authors: [{ name: "Matías Oliva" }],
       creator: "Matías Oliva",
       publisher: "Latam IT NZ",
@@ -46,8 +51,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         locale: 'en_US',
         alternateLocale: 'es_ES',
         url: 'https://latamitnz.com/en',
-        title: 'Latam IT NZ | Your Guide to IT Jobs in New Zealand',
-        description: 'Expert guidance for Latin American IT professionals looking to work in New Zealand. Get personalized advice on job search, visa processes, and career development.',
+        title: 'Latam IT NZ | A chat about tech in New Zealand',
+        description: 'A simple free chat with Matías about finding your first tech job in New Zealand.',
         siteName: 'Latam IT NZ',
         images: [
           {
@@ -60,8 +65,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Latam IT NZ | Your Guide to IT Jobs in New Zealand',
-        description: 'Expert guidance for Latin American IT professionals looking to work in New Zealand. Get personalized advice on job search, visa processes, and career development.',
+        title: 'Latam IT NZ | A chat about tech in New Zealand',
+        description: 'A simple free chat with Matías about finding your first tech job in New Zealand.',
         creator: '@matoliva',
         images: ['/images/logo.png'],
       },
@@ -84,9 +89,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     },
     es: {
-      title: "Latam IT NZ | Tu Guía para Trabajar en IT en Nueva Zelanda",
-      description: "Guía experta para profesionales latinoamericanos de IT que buscan trabajar en Nueva Zelanda. Obtén asesoramiento personalizado sobre búsqueda de trabajo, procesos de visa y desarrollo profesional.",
-      keywords: "trabajos IT Nueva Zelanda, empleos tecnológicos latinoamericanos, industria tecnológica NZ, reclutamiento IT NZ, carrera tecnológica NZ, desarrolladores latinoamericanos NZ",
+      title: "Latam IT NZ | Charlemos sobre IT en Nueva Zelanda",
+      description: "Una charla gratis y simple con Matías sobre cómo buscar tu primer laburo IT en Nueva Zelanda.",
+      keywords: "trabajos IT Nueva Zelanda, empleos tecnológicos latinoamericanos, industria tecnológica NZ, carrera tecnológica NZ, desarrolladores latinoamericanos NZ, laburo IT NZ",
       authors: [{ name: "Matías Oliva" }],
       creator: "Matías Oliva",
       publisher: "Latam IT NZ",
@@ -108,8 +113,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         locale: 'es_ES',
         alternateLocale: 'en_US',
         url: 'https://latamitnz.com/es',
-        title: 'Latam IT NZ | Tu Guía para Trabajar en IT en Nueva Zelanda',
-        description: 'Guía experta para profesionales latinoamericanos de IT que buscan trabajar en Nueva Zelanda. Obtén asesoramiento personalizado sobre búsqueda de trabajo, procesos de visa y desarrollo profesional.',
+        title: 'Latam IT NZ | Charlemos sobre IT en Nueva Zelanda',
+        description: 'Una charla gratis y simple con Matías sobre cómo buscar tu primer laburo IT en Nueva Zelanda.',
         siteName: 'Latam IT NZ',
         images: [
           {
@@ -122,8 +127,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Latam IT NZ | Tu Guía para Trabajar en IT en Nueva Zelanda',
-        description: 'Guía experta para profesionales latinoamericanos de IT que buscan trabajar en Nueva Zelanda. Obtén asesoramiento personalizado sobre búsqueda de trabajo, procesos de visa y desarrollo profesional.',
+        title: 'Latam IT NZ | Charlemos sobre IT en Nueva Zelanda',
+        description: 'Una charla gratis y simple con Matías sobre cómo buscar tu primer laburo IT en Nueva Zelanda.',
         creator: '@matoliva',
         images: ['/images/logo.png'],
       },
@@ -154,7 +159,8 @@ export default async function RootLayout({
   children,
   params
 }: Props) {
-  const { lang } = await params;
+  const { lang: routeLang } = await params;
+  const lang = toLocale(routeLang);
   const dictionary = await getDictionary(lang);
 
   return (
