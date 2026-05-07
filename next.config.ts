@@ -6,6 +6,9 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  images: {
+    qualities: [75, 85],
+  },
   /* config options here */
 };
 

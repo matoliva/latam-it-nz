@@ -1,38 +1,38 @@
 {
   "navigation": {
     "home": "Inicio",
-    "about": "Sobre Mí",
-    "bookSession": "Agendar Sesión",
+    "about": "Sobre mí",
+    "bookSession": "Agendar una charla",
     "openPositions": "Posiciones Abiertas",
     "moreInfo": "Más Información",
     "contact": "Contacto"
   },
   "common": {
     "welcome": "Bienvenido a Latam IT NZ",
-    "description": "Tu puerta de entrada a oportunidades IT en Nueva Zelanda"
+    "description": "Notas, recursos y experiencia real sobre IT en Nueva Zelanda"
   },
   "about": {
-    "title": "Latinos en NZ: cómo empezar en IT sin vueltas.",
-    "description": "Soy Matías, desarrollador frontend viviendo en Nueva Zelanda. Si estás buscando tu primer trabajo IT acá o querés entender cómo es el mercado, podés agendar una charla gratuita conmigo. Te comparto mi experiencia, recursos útiles y consejos prácticos. ¿Te sumó lo que hablamos? Podés apoyarme con un café ☕, sin compromiso 🙂",
-    "bookConsultation": "Agendar Consulta",
-    "moreAboutMe": "Sobre Mí",
-    "imageAlt": "Reclutador Profesional"
+    "title": "Latinos en NZ: cómo empezar en IT sin vueltas",
+    "description": "Soy Matías, desarrollador frontend viviendo en Nueva Zelanda. Si estás buscando tu primer laburo IT acá, o querés entender cómo se mueve el mercado, podemos charlar gratis. Te cuento lo que aprendí, recursos útiles y consejos prácticos desde mi experiencia.",
+    "bookConsultation": "Agendar una charla",
+    "moreAboutMe": "Sobre mí",
+    "imageAlt": "Matías Oliva - Desarrollador Frontend"
   },
   "moreAbout": {
-    "title": "Mi Camino en la Tecnología",
-    "description1": "Comencé mi camino en tecnología en Argentina, trabajando como desarrollador frontend para varias empresas. Con el tiempo, gané experiencia en distintos roles y tecnologías, y decidí dar el salto a Nueva Zelanda.",
-    "description2": "La transición no fue fácil, pero valió la pena. Hoy tengo experiencia trabajando con empresas kiwi, tanto de forma presencial como remota. Aprendí mucho sobre la industria local, el mercado laboral y lo que se necesita para crecer como desarrollador internacional en NZ.",
-    "description3": "Ahora, me apasiona ayudar a otros desarrolladores latinoamericanos a que su transición sea más sencilla. Si estás empezando en tecnología o pensando en mudarte a Nueva Zelanda, estoy acá para compartir lo que aprendí y acompañarte en el proceso.",
+    "title": "Un poco de mi camino",
+    "description1": "Arranqué en tecnología en Argentina, trabajando como desarrollador frontend para distintas empresas. Después de unos años decidí venirme a Nueva Zelanda y entender desde adentro cómo funciona el mercado local.",
+    "description2": "No fue un camino lineal, pero aprendí un montón. Trabajé con empresas kiwi, tanto presencial como remoto, y fui juntando aprendizajes sobre entrevistas, CVs, cultura de trabajo y el día a día en IT acá.",
+    "description3": "No tengo todas las respuestas, pero sí pasé por varias de estas etapas. Si estás empezando en tecnología o pensando en mudarte a Nueva Zelanda, te puedo contar qué me sirvió y qué haría distinto.",
     "imageAlt": "Matías Oliva - Desarrollador Frontend"
   },
   "booking": {
-    "title": "Agenda una Consulta Gratuita",
-    "description": "Hablemos sobre tus objetivos profesionales y cómo puedo ayudarte a encontrar la oportunidad perfecta en la industria IT de Nueva Zelanda.",
-    "scheduleButton": "Agendar tiempo conmigo"
+    "title": "Charlamos un rato",
+    "description": "Traé tus dudas sobre CV, entrevistas, mercado local o primeros pasos en IT en Nueva Zelanda. La idea es hablar simple y aterrizado.",
+    "scheduleButton": "Elegir un horario"
   },
   "buyMeCoffee": {
-    "title": "Apoya Mi Trabajo",
-    "description": "Si encontraste útil nuestra conversación y querés apoyar mi trabajo, podés invitarme un café. Tu apoyo me ayuda a continuar brindando orientación a la comunidad tecnológica latinoamericana en Nueva Zelanda."
+    "title": "Apoyá mi trabajo",
+    "description": "Si algo de esto te sirvió, podés invitarme un café. Me ayuda a seguir compartiendo notas, recursos y tiempo con la comunidad tech latinoamericana en Nueva Zelanda."
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
@@ -41,8 +41,8 @@
     "description": "Dev en NZ compartiendo lo que me hubiera gustado saber al empezar",
     "quickLinks": "Enlaces Rápidos",
     "connect": "Mis redes",
-    "about": "Sobre Mí",
-    "bookSession": "Agendar Sesión",
+    "about": "Sobre mí",
+    "bookSession": "Agendar una charla",
     "openPositions": "Posiciones Abiertas"
   }
-} 
+}
